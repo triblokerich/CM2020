@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h1>{{ _('Member details')}} </h1>
+    {% if current_user.adminuser or current_user.coach or
+      current_user.treasurer or current_user.sessionmanager%}
+      {% if form %}
+      {{ wtf.quick_form(form) }}
+      <br>
+      {% endif %}
+    {% endif %}
+<table class="table table-hover">
+        <tr>
+        <th>Username</th>
+        <th>User Number</th>
+        <th>Forename</th>
+        <th>Surname</th>
+        <th>Administrator</th>
+        <th>Coach</th>
+        <th>Session <br> Manager</th>
+        <th>Treasurer</th>
+        <th>Balance</th>
+        </tr>
+    {% for user in users %}
+        {% include '_user.html' %}
+    {% endfor %}
+</table>
+
+{% endblock %}

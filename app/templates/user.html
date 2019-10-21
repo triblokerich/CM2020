@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <table class="table table-hover">
+        <tr>
+            <td width="256px"><img src="{{ user.avatar(256) }}"></td>
+            <td>
+                <h1>{{ _('User') }}: {{ user.username }}</h1>
+				
+			<!--	<p>{{ _('%(count)d followers', count=user.followers.count()) }}, {{ _('%(count)d following', count=user.followed.count()) }}</p> -->
+				{% if user == current_user %}
+					<p><b><a href="{{ url_for('main.edit_profile2', requesting_user=current_user.username,username=current_user.username) }}">{{ _('Edit your profile') }}</a></p>
+                {% else %}
+					{% if current_user.adminuser and current_user.club == user.club %}
+						<p><b><a href="{{ url_for('main.edit_profile2', requesting_user=current_user.username,username=user.username) }}">{{ _('Edit profile') }}</a></p>
+					{% endif %} 
+				{% endif %} 
+				<b>
+         <!--       {% if not user == current_user %}
+					{% if not current_user.is_following(user) %}
+						<p><a href="{{ url_for('main.follow', username=user.username) }}">{{ _('Follow') }}</a></p>
+					{% else %}
+						<p><a href="{{ url_for('main.unfollow', username=user.username) }}">{{ _('Unfollow') }}</a></p>
+					{% endif %} 
+				{% endif %} </b>  -->
+				{% if user == current_user %}
+					<p style="font-size:100%;"> <small>To show your photo on your profile register at<br/>
+						<a href="http://www.gravatar.com" target="_blank">www.gravatar.com</a></small></p>
+				{% endif %}
+
+			</td>
+			</tr>
+
+			{% if current_user.adminuser  or user == current_user or current_user.coach %}
+			  {% if current_user.club == user.club %}
+				<tr>
+				<td>
+					
+					{% if user.last_seen %}
+		<!--		<p><b>{{ _('Last seen on') }}:</b></td><td> {{ moment(user.last_seen).format('LLL') }}</p> 
+				{% endif %}
+				
+				</td> </tr> -->
+					<tr> <td><b>
+					{{ _('Forename') }}:</b> {{ user.forename }}
+					<td><b>
+					{{ _('Surname') }}:</b> {{ user.surname }}
+					</td> </tr>
+					<tr> <td><b>
+					{{ _('Medical Conditions') }}:</b></td><td> {{ user.about_me }}
+					</td> </tr>
+					<tr> <td><b>
+					<p class=MsoNormal ><o:p>&nbsp;</o:p>
+					{{ _('Emergency Contact') }}:</b> {{ user.next_of_kin_name }}</p>
+					</td><td><b>
+					<p class=MsoNormal ><o:p>&nbsp;</o:p>
+					{{ _('Emergency Contact No') }}:</b> {{ user.next_of_kin_num }}</p>
+					</td> </tr>		
+					<tr> <td><b>
+					<p class=MsoNormal ><o:p>&nbsp;</o:p>
+					{{ _('Emergency Contact 2') }}:</b> {{ user.next_of_kin_name2 }}</p>
+					<td><b>
+					<p class=MsoNormal ><o:p>&nbsp;</o:p>
+					{{ _('Emergency Contact 2 No') }}:</b> {{ user.next_of_kin_num2 }}</p>
+					</td> </tr>
+					{% if current_user.adminuser  or user == current_user %}
+					<tr> <td><b>
+					{{ _('User Number') }}:</b></td><td> {{ user.usernum }}
+					</td> </tr>
+					<tr> <td><b>
+					{{ _('Member Status ') }}:</b> {{ user.current }}
+					</td><td> <b>
+					{{ _('Member Expires ') }}:</b> {{ user.member_expire }}
+					</td> </tr>
+					<tr> <td><b>
+					{{ _('Member Category ') }}:</b> </td><td>{{ user.category }}
+					</td> </tr>
+					
+					<tr> <td><b>
+					{{ _('Gender') }}:</b> {{ user.gender }}
+					<td> <b>
+					{{ _('Date of Birth') }}:</b> {{ user.dob }}
+					</td> </tr>
+					<tr> <td><b>
+					{{ _('Club') }}:</b></td><td> {{ club.clubname }} 
+					</td> </tr>
+					<tr> <td><b>
+					{{ _('Email') }}:</b></td><td> {{ user.email }}
+					</td> </tr>
+					<tr> <td><b>
+					{{_('Address')}}:</b></td><td> 
+						<p class=MsoNormal ><o:p>&nbsp;</o:p>
+						{{ user.address1 }}</p>
+						<p class=MsoNormal ><o:p>&nbsp;</o:p>
+						{{ user.address2 }}</p>
+						<p class=MsoNormal ><o:p>&nbsp;</o:p>
+						{{ user.address3 }}</p>
+						<p class=MsoNormal ><o:p>&nbsp;</o:p>
+						{{ user.postcode }}</p>
+					</td> </tr>
+					<tr> <td><b>
+					<p class=MsoNormal ><o:p>&nbsp;</o:p>
+						{{ _('Admin User') }}:</b> {{ user.adminuser }}</p>
+					</td> <td><b>
+					<p class=MsoNormal ><o:p>&nbsp;</o:p>
+						{{ _('Coach') }}:</b> {{ user.coach }}</p>
+					</td> </tr>
+					<tr> <td><b>
+					<p class=MsoNormal ><o:p>&nbsp;</o:p>
+						{{ _('Treasurer') }}:</b> {{ user.treasurer }}</p>
+					</td> <td> <b>
+					<p class=MsoNormal ><o:p>&nbsp;</o:p>	
+						{{ _('Session Manager') }}:</b> {{ user.sessionmanager }}
+					</td> </tr>
+					{% endif %}
+			      {% endif %} 
+			    {% endif %} 
+				<tr> 
+
+        </tr> 
+    </table>
+    {% for post in posts %}
+        {% include '_post.html' %}
+    {% endfor %}
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span> {{ _('Newer posts') }}
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    {{ _('Older posts') }} <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}

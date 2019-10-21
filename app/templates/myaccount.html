@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+    <h1>Account: {{ _('%(username)s',username=username)}}
+     {{ _(' - current balance is GBP%(balance)s', balance = strbal)}}</h1>
+
+<br>
+<br>
+
+<table class="table table-hover">
+  <tr>
+        <th> Date
+        <th>Activity</th>
+        <th>Activity Cost (GBP)</th>
+        <th>Payment Received</th>
+  </tr>
+
+    {% for myactivity in myactivities %}
+        {% include '_myaccount.html' %}
+    {% endfor %}
+</table>
+
+{% endblock %}

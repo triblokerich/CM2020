@@ -1,0 +1,124 @@
+Benchmark:
+
+30 September 2019 at 2:28.
+
+At this point:-
+> all screens are working.
+> Registration screen issue remains regarding the use of the SelectField for Club.
+> To make this screen work a temp changes made to row 56 of auth/routes/py hard setting a club code
+> No answer available at this time
+> ActivityAttendees screen also wants to use SelectField once the problem is understood and resolved.
+
+
+
+PIP Issues for the barcode software:
+Local download and load of opencv, numpy and imutils (pip install from downloads directory)
+	python -m pip install opencv_python-4.1.1+contrib-cp37-cp37m-win_amd64.whl	
+	python -m pip install numpy-1.16.5+vanilla-cp37-cp37m-win_amd64.whl
+	IMUTILS - imutils-0.5.3.tar.gz
+
+
+
+
+
+This won't run as a BAT file but gives the instructions you need within the CMD file
+
+When the PC is booted you need to create a venv environment
+
+>> The following appears necessary each time you enter CMD
+
+venv\Scripts\activate - (required after system reboot)
+python -m venv venv
+   * this now errors with a security problem
+   * instead, cd /venv/Scripts and repeat 
+   * need to get to the bottom of it
+   
+cd PycharmProjects/CM2020
+
+set MAIL_SERVER=smtp.googlemail.com
+set MAIL_PORT=587
+set MAIL_USE_TLS=1
+set MAIL_USERNAME=clubmgr2020@gmail.com
+set MAIL_PASSWORD=ClubMgr2020!
+
+
+
+(Flaskenv now contains this, no longer required) set FLASK_APP=microblog.py
+
+flask run
+
+
+Notes:
+
+As part of the dev we did some PIP installs. It appears these don't need to be repeated for every sessions
+
+pip install flask
+pip install python-dotenv
+pip install flask-wtf
+pip install flask-sqlalchemy
+pip install flask-migrate
+pip install flask-login
+pip install flask-mail
+pip install pyjwt
+pip install flask-bootstrap
+pip install flask-moment
+pip install flask-babel
+pip install guess_language-spirit
+pip install requests
+pip install wtforms-html5
+pip install wtforms_components
+pip install SQLAlchemy-ImageAttach
+
+For adding the database functionality, "flask db init"
+
+
+
+
+
+****MOdule 6 - adding fields to User table and doing the migration.
+flask db migrate -m "new fields in user model"
+flask db upgrade
+
+
+****Debug mode:
+set FLASK_DEBUG=1
+
+
+****configure email:  - do in venv, not CMD or Python
+(internal mock email)
+set MAIL_SERVER=localhost
+set MAIL_PORT=8025
+
+set MAIL_SERVER=smtp.googlemail.com
+set MAIL_PORT=587
+set MAIL_USE_TLS=1
+set MAIL_USERNAME=clubmgr2020@gmail.com
+set MAIL_PASSWORD=ClubMgr2020!
+
+****Regression test pack:
+python tests.py
+
+
+****Module 13 - translation (only to ES in example, repeat for other languages)
+
+pybabel extract -F babel.cfg -k _l -o messages.pot .
+pybabel init -i messages.pot -d app/translations -l es
+pybabel compile -d app/translations
+* to add extra lines with a conversion utility (adding _() or _1() ) then issue
+pybabel extract -F babel.cfg -k _l -o messages.pot .
+pybabel update -i messages.pot -d app/translations
+
+
+****Module 14
+
+sign up to Azure (I haven't) but then:
+ set MS_TRANSLATOR_KEY=<paste-your-key-here>
+ 
+ 
+ 
+ 
+ 
+ Changes from main code
+ Users.html5
+			{% if user == current_user %} removed
+			

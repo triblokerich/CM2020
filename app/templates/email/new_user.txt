@@ -1,0 +1,14 @@
+Dear {{ adminuser.username }},
+
+{{user.username}} has just registered in Club Manager.
+
+Please login to Club Manager and edit their profile:-
+  > Tick the "Registered User" box
+
+Once payment confirmation has been received
+  > tick the "Active Member" box
+  > Specify the "Member Expires" date (often this is 31 December of the current year)
+
+Sincerely,
+
+The Club Manager 2020 Team

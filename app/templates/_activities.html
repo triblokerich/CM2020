@@ -1,0 +1,16 @@
+
+        <tr>
+            <td>
+                {% set activity_link %}
+                    <span class="user_popup">
+                        <a href="{{ url_for('main.attendee_register',activity = activity.activitynumber,
+                             date = activity.activitydate,activityname=activity.activityname) }}">
+                            {{ activity.activitydate }}
+                        </a>
+                    </span>
+                {% endset %}
+                {{ _('%(activityname)s',
+                    activityname=activity_link) }}
+        </td><td>
+                {{ _('%(name)s',name=activity.activityname) }}
+        </td>  </tr>

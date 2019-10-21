@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h1>{{ _('Hi, %(username)s!', username=current_user.username) }}</h1>
+    <p>{{ _('Your user number is, %(usernum)s!', usernum=current_user.usernum) }}</p>
+    <p>Photograph, print or download your barcode to use for club activities</p>
+<p> </p>
+<p> {{ _( 'Name: %(forename)s',forename=current_user.forename) }}
+    {{ _( '%(surname)s',surname=current_user.surname) }} </p>
+<!--    <img src="/static/ean13_barcode.svg"></p> -->
+    <img src="/static/code39_barcode.svg"></p>
+
+
+{% endblock %}

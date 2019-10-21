@@ -1,0 +1,11 @@
+
+        <tr>  <td>
+                {{ _('%(date)s',date=myactivity.activitydate) }}
+        </td><td>
+                {{ _('%(activity)s', activity = myactivity.activityname) }}
+        </td><td>
+                {{ _('%(cost)s', cost = myactivity.cost/100) }}
+        </td>  <td>
+                {{ _('%(received)s', received = myactivity.received/100) }}
+        </td>  </tr>
+

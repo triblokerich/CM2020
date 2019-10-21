@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+  <!-- Here I want to add the photo of the attendee just registered
+  <table class="table table-hover">
+        <tr>
+           {% if( user is defined) %}
+               <td width="256px"><img src="{{ user.avatar(256) }}"></td>
+            {% endif %}
+        </tr>
+ </table>-->
+
+    <h1>Activity Attendees</h1>
+<b> Activity: </b> <l1> {{ _('%(activityname)s' , activityname = activityname) }},</l1>
+<b> Date: </b> <l1> {{ _('%(date)s' , date = date) }} </l1>
+<br>
+<br>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+<table class="table table-hover">
+  <tr>
+        <th>User Name</th>
+        <th>Activity Cost (GBP)</th>
+  </tr>
+
+    {% for attendee in attendees %}
+        {% include '_attendees.html' %}
+    {% endfor %}
+</table>
+
+{% endblock %}
