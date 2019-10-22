@@ -1,3 +1,3 @@
-# Welcome to Microblog!
+# Welcome to Club Manager 2020!
 
-This is an example application featured in my [Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world). See the tutorial for instructions on how to work with it.
+This is built on the excellent example application platform featured in Miguel Grinbert's [Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
